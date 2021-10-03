@@ -12,7 +12,10 @@ pipeline {
         stage('Build image') {
             steps {
                 //app = docker.build("pateldhiren494/multi-k8s")
-                echo "stage 2 built image"
+                echo "stage 2 build image"
+                sh '''
+                    docker image build -t pateldhiren494/multi-client ./client
+                '''
             }
         }
 
