@@ -4,6 +4,7 @@ pipeline {
         stage('Clone repository') {
             steps{
                 checkout scm
+                echo "testing webhook"
                 echo "stage 1 pulled scm"
             }
         }
@@ -17,9 +18,8 @@ pipeline {
 
         stage('Push image') {
             steps {
-                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                    app.push("latest")
-                }
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub')
+                app.push("latest")
                 echo "stage 3 pushed image"
             }
         }
