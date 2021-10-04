@@ -1,0 +1,11 @@
+version: '3'
+services:
+  jenkins:
+    container_name: jenkins-docker
+    image: pateldhiren494/jenkins-docker
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
