@@ -1,18 +1,15 @@
 node {
     def app
 
-    stage('Initialize'){
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-        sh 'service docker start'
-    }
-
     stage('Clone repository') {
         checkout scm
     }
 
     stage('Build image') {
-        app = docker.build("pateldhiren494/multi-client", "./client")
+        //app = docker.build("pateldhiren494/multi-client", "./client")
+        sh '''
+            docker image build -t pateldhiren494/multi-client ./client
+        '''
     }
 
     /*stage('Test image') {
