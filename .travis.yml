@@ -32,4 +32,7 @@ after_success:
   #Deploying on ibm cloud
   - ibmcloud login --apikey "$IBMCLOUD_ACCESS_APIKEY"
   - ibmcloud ks cluster config --cluster multi-k8s --admin
+  - kubectl get nodes
+  - kubectl get pods
+  - ls 
   - kubectl apply -f ./k8s
