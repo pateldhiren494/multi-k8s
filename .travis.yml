@@ -12,14 +12,16 @@ script:
 
 after_success:
   - docker build -t pateldhiren494/multi-client ./client
-  - docker build -t pateldhiren494/multi-nginx ./nginx
   - docker build -t pateldhiren494/multi-server ./server
   - docker build -t pateldhiren494/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
   - docker push pateldhiren494/multi-client
-  - docker push pateldhiren494/multi-nginx
   - docker push pateldhiren494/multi-server
   - docker push pateldhiren494/multi-worker
-
+  #Deploying on ibm cloud
+  - curl -fsSL https://clis.cloud.ibm.com/install/osx | sh
+  - ibmcloud login --sso
+  - ibmcloud ks cluster config --cluster multi-k8s --admin
+  - kubectl apply -f ./k8s
