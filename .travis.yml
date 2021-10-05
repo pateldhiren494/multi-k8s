@@ -30,6 +30,6 @@ after_success:
   - docker push pateldhiren494/multi-worker
 
   #Deploying on ibm cloud
-  - ibmcloud login --sso
+  - ibmcloud login --apikey "$IBMCLOUD_ACCESS_APIKEY"
   - ibmcloud ks cluster config --cluster multi-k8s --admin
   - kubectl apply -f ./k8s
