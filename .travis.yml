@@ -5,6 +5,7 @@ services:
   - docker
 
 before_install:
+  - whoami
   - docker build -t pateldhiren494/react-test -f ./client/Dockerfile.dev ./client
 
 script:
