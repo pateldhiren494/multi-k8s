@@ -15,6 +15,7 @@ install:
   - chmod +x ./kubectl
   - sudo mv ./kubectl /usr/local/bin/kubectl
   - curl -fsSL --insecure https://clis.cloud.ibm.com/install/linux | sh
+  - ibmcloud plugin install container-service
 
 after_success:
   - ibmcloud help
