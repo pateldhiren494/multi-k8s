@@ -15,7 +15,7 @@ install:
   - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
   - chmod +x ./kubectl
   - sudo mv ./kubectl /usr/local/bin/kubectl
-  - curl -SL --insecure https://clis.cloud.ibm.com/install/linux > ibmcloudcli.sh
+  #- curl -SL --insecure https://clis.cloud.ibm.com/install/linux > ibmcloudcli.sh
   - chown travis ibmcloudcli.sh
   - chmod +x ibmcloudcli.sh
   - cat ibmcloudcli.sh
