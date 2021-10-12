@@ -18,6 +18,7 @@ install:
   - curl -SL --insecure https://clis.cloud.ibm.com/install/linux > ibmcloudcli.sh
   - chown travis ibmcloudcli.sh
   - chmod +x ibmcloudcli.sh
+  - cat ibmcloudcli.sh
   - sh ibmcloudcli.sh
   - ibmcloud plugin install container-service
 
