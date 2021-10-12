@@ -24,20 +24,20 @@ install:
 
 after_success:
   - ibmcloud help
-  - docker build -t pateldhiren494/multi-client ./client
-  - docker build -t pateldhiren494/multi-server ./server
-  - docker build -t pateldhiren494/multi-worker ./worker
+  #- docker build -t pateldhiren494/multi-client ./client
+  #- docker build -t pateldhiren494/multi-server ./server
+  #- docker build -t pateldhiren494/multi-worker ./worker
 
   # Log in to the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # Take those images and push them to docker hub
-  - docker push pateldhiren494/multi-client
-  - docker push pateldhiren494/multi-server
-  - docker push pateldhiren494/multi-worker
+  #- docker push pateldhiren494/multi-client
+  #- docker push pateldhiren494/multi-server
+  #- docker push pateldhiren494/multi-worker
 
   #Deploying on ibm cloud
-  - ibmcloud login --apikey "$IBMCLOUD_ACCESS_APIKEY"
+  - ibmcloud login --apikey "$IBMCLOUD_ACCESS_APIKEY" -r us-east
   - ibmcloud ks cluster config --cluster multi-k8s --admin
   - kubectl get nodes
   - kubectl get pods
