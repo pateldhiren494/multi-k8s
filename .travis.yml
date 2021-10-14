@@ -39,4 +39,4 @@ after_success:
   - kubectl get nodes
   - kubectl get pods
   - ls 
-  - kubectl apply -f ./k8s
+  - kubectl delete -f ./k8s
