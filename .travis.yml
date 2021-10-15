@@ -38,6 +38,5 @@ after_success:
   #- docker push pateldhiren494/multi-server
   #- docker push pateldhiren494/multi-worker
 
-  #Deploying on ibm cloud
   - kubectl get nodes
   - kubectl apply -f ./k8s
