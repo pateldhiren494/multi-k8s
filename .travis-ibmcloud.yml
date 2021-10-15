@@ -4,10 +4,6 @@ language: generic
 services:
   - docker
 
-env:
-  global:
-    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
-
 before_install:
   - whoami
   #- docker build -t pateldhiren494/react-test -f ./client/Dockerfile.dev ./client
@@ -16,16 +12,15 @@ script:
   #- docker run -e CI=true pateldhiren494/react-test npm test
 
 install:
-  - curl https://sdk.cloud.google.com | bash > /dev/null;
-  - source $HOME/google-cloud-sdk/path.bash.inc
-  - gcloud components update kubectl
-  - gcloud auth activate-service-account --key-file service-account.json
-  - gcloud config set project multi-k8s-329103
-  - gcloud config set compute/zone us-east1-b
-  - gcloud container clusters get-credentials multi-k8s
-
+  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  - chmod +x ./kubectl
+  - sudo mv ./kubectl /usr/local/bin/kubectl
+  - sudo echo "-k" > ~/.curlrc
+  - curl -SL https://clis.cloud.ibm.com/install/linux | sh
+  - ibmcloud plugin install container-service
 
 after_success:
+  - ibmcloud help
   #- docker build -t pateldhiren494/multi-client ./client
   #- docker build -t pateldhiren494/multi-server ./server
   #- docker build -t pateldhiren494/multi-worker ./worker
@@ -39,5 +34,9 @@ after_success:
   #- docker push pateldhiren494/multi-worker
 
   #Deploying on ibm cloud
+  - ibmcloud login --apikey "$IBMCLOUD_ACCESS_APIKEY" -r us-east
+  - ibmcloud ks cluster config --cluster multi-k8s --admin
   - kubectl get nodes
-  - kubectl apply -f ./k8s
+  - kubectl get pods
+  - ls
+  - kubectl delete -f ./k8s
